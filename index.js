@@ -1,14 +1,14 @@
+require("dotenv/config");
 const express = require("express");
 const app = express();
 const path = require("path");
 const cors = require("cors");
-const PORT = process.env.PORT || 5005;
+const PORT = process.env.PORT || 80;
 
 
 //Middlewares
 app.use(express.json());
 app.use(cors());
-
 
 
 //For the react app
