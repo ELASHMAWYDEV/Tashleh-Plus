@@ -1,0 +1,29 @@
+@import "global";
+
+
+.footer-container {
+  margin-top: auto;
+  background-color: $gray;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .right-items {
+    a {
+      margin-right: 20px;
+      color: $white;
+      transition: 0.2s ease;
+      font-size: 18px;
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+  .left-items {
+    p {
+      font-family: 'Cairo', sans-serif;
+      font-size: 18px;
+      color: $white;
+    }
+  }
+}
