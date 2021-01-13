@@ -10,9 +10,12 @@
   .logo-container {
     width: 300px;
     max-width: 90%;
+    margin-top: 50px;
     img {
       width: 100%;
       cursor: pointer;
+      filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.2))
+
     }
   }
   .auth-box-container {
@@ -39,41 +42,52 @@
         color: $white;
         font-weight: 600;
         font-size: 24px;
-        transition: 0.3s ease;
         padding: 10px;
+        transition: 0.3s ease;
+        &-active {
+          background-color: $darkBlue;
+        }
         &:hover {
+          background-color: $blue;
+        }
+        &:active {
+          transition: none;
           background-color: $darkBlue;
         }
       }
     }
     .box-body {
-      display: flex;
-      .right-btn,
-      .left-btn {
-        width: 50%;
+      &-flex {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 250px;
-        font-size: 26px;
-        color: $white;
-        transition: 0.3s ease;
-      }
-      .right-btn {
-        background-color: $blue;
-        &:hover {
-          background-color: $darkBlue;
+        .right-btn,
+        .left-btn {
+          width: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 250px;
+          font-size: 26px;
+          color: $white;
+          transition: 0.3s ease;
+        }
+        .right-btn {
+          background-color: $blue;
+          &:hover {
+            background-color: $darkBlue;
+          }
+        }
+        .left-btn {
+          background-color: $black;
+          &:hover {
+            background-color: #151618;
+          }
         }
       }
-      .left-btn {
-        background-color: $black;
-        &:hover {
-          background-color: #151618;
-        }
-      }
+
       .box-title {
         text-align: center;
         padding-top: 15px;
+        user-select: none;
         h2,
         div {
           display: inline-block;
@@ -82,6 +96,9 @@
         h2 {
           color: $blue;
           cursor: pointer;
+          &:hover {
+            color: $darkBlue;
+          }
         }
       }
     }
@@ -99,6 +116,7 @@
       }
       .auth-btn {
         @include Button;
+        width: 50%;
       }
     }
   }

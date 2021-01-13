@@ -45,30 +45,26 @@ const Auth = () => {
           <Route path={[`${path}/customer`, `${path}/vendor`]}>
             <Link
               to={`${path}/${type}/login`}
-              className="auth-btn"
-              style={{
-                backgroundColor:
-                  [`${path}/customer/login`, `${path}/vendor/login`].indexOf(
-                    location.pathname
-                  ) !== -1
-                    ? " #287AE1"
-                    : "transparent",
-              }}
+              className={`auth-btn ${
+                [`${path}/customer/login`, `${path}/vendor/login`].indexOf(
+                  location.pathname
+                ) !== -1
+                  ? "auth-btn-active"
+                  : ""
+              }`}
             >
               تسجيل الدخول
             </Link>
             <Link
               to={`${path}/${type}/register`}
-              className="auth-btn"
-              style={{
-                backgroundColor:
-                  [
-                    `${path}/customer/register`,
-                    `${path}/vendor/register`,
-                  ].indexOf(location.pathname) !== -1
-                    ? " #287AE1"
-                    : "transparent",
-              }}
+              className={`auth-btn ${
+                [
+                  `${path}/customer/register`,
+                  `${path}/vendor/register`,
+                ].indexOf(location.pathname) !== -1
+                  ? "auth-btn-active"
+                  : ""
+              }`}
             >
               حساب جديد
             </Link>
@@ -79,26 +75,19 @@ const Auth = () => {
 
         {/*-------------Box Body START-------------*/}
 
-        <div
-          className="box-body"
-          style={{
-            display:
-              location.pathname !==
-              `${path}/${type}/${location.pathname.split("/")[3]}`
-                ? "flex"
-                : "block",
-          }}
-        >
-          <Route exact path={path}>
+        <Route exact path={path}>
+          <div className="box-body-flex">
             <Link to={`${path}/customer/login`} className="right-btn">
               زبون
             </Link>
             <Link to={`${path}/vendor/login`} className="left-btn">
               بائع
             </Link>
-          </Route>
+          </div>
+        </Route>
 
-          <Route path={[`${path}/customer/login`, `${path}/vendor/login`]}>
+        <Route path={[`${path}/customer/login`, `${path}/vendor/login`]}>
+          <div className="box-body">
             <div className="box-title">
               <div>
                 أنا
@@ -107,7 +96,7 @@ const Auth = () => {
                     history.push(
                       `${path}/${
                         type === "customer" ? "vendor" : "customer"
-                      }/register`
+                      }/login`
                     )
                   }
                 >
@@ -138,11 +127,11 @@ const Auth = () => {
                 العودة الي الصفحة الرئيسية
               </Link>
             </div>
-          </Route>
+          </div>
+        </Route>
 
-          <Route
-            path={[`${path}/customer/register`, `${path}/vendor/register`]}
-          >
+        <Route path={[`${path}/customer/register`, `${path}/vendor/register`]}>
+          <div className="box-body">
             <div className="box-title">
               <div>
                 أنا
@@ -197,12 +186,13 @@ const Auth = () => {
                 العودة الي الصفحة الرئيسية
               </Link>
             </div>
-          </Route>
-        </div>
-
-        {/*-------------Box Body END-------------*/}
+          </div>
+        </Route>
       </div>
+
+      {/*-------------Box Body END-------------*/}
     </div>
+    // </div>
   );
 };
 

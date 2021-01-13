@@ -17,25 +17,22 @@ const Header = () => {
       </div>
       <div className="nav-container">
         <Link
-          to="/"
-          style={{
-            backgroundColor: location.pathname === "/" ? "#287AE1" : "#54a0ff",
-          }}
+          to="/home"
+          className={`${location.pathname.startsWith("/home") ? "active-link" : ""}`}
         >
           القطع
         </Link>
         <Link
           to="/cars"
-          style={{
-            backgroundColor:
-              location.pathname === "/cars" ? "#287AE1" : "#54a0ff",
-          }}
+          className={`${location.pathname === "/cars" ? "active-link" : ""}`}
         >
           سيارات التشليح
         </Link>
       </div>
       <div className="left-btns-container">
-        <Link to="/auth" className="auth-btn">تسجيل الدخول / حساب جديد</Link>
+        <Link to="/auth" className="auth-btn">
+          تسجيل الدخول / حساب جديد
+        </Link>
       </div>
     </div>
   );
