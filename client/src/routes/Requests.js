@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ItemBox } from "../components/index";
+import { ItemBox, Pagination } from "../components/index";
 
 //Styles
 import "../styles/Requests.scss";
@@ -77,6 +77,7 @@ const Requests = () => {
           {itemList.map((item, i) => (
             <ItemBox key={i} item={item} />
           ))}
+          <Pagination />
         </div>
       </div>
     </div>
