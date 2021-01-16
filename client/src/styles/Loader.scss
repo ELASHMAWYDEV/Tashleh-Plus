@@ -1,0 +1,33 @@
+@import "global";
+
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  svg {
+    font-size: 70px;
+    color: $white;
+    animation: loading 1.2s linear infinite;
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg) scale(1);
+        
+      }
+      50% {
+        transform: rotate(180deg) scale(1.5);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+  }
+}

@@ -4,9 +4,9 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { Footer } from "./components/index";
+import { Footer, Loader } from "./components/index";
 import { Home, Auth } from "./routes/index";
-import { AppProvider } from "./helpers/AppProvider";
+import { AppProvider, useLoadingContext } from "./helpers/AppProvider";
 
 //Styles
 import "./styles/App.scss";
@@ -15,6 +15,7 @@ const App = () => {
   return (
     <AppProvider>
       <div className="App">
+        <Loader />
         <Router>
           <Switch>
             <Redirect exact strict from="/" to="/home" />
