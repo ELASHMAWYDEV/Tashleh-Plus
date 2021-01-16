@@ -1,33 +1,23 @@
 import { useState, useEffect, useRef } from "react";
+import { MdClose } from "react-icons/md";
 
 //Styles
 import "../styles/AddOrder.scss";
 
 const AddOrder = () => {
   const [isboxActive, setIsBoxActive] = useState(false);
-  const [topPoistion, setTopPosition] = useState(0);
 
   const containerRef = useRef(null);
   const boxRef = useRef(null);
 
   useEffect(() => {
-    console.log(boxRef);
-    window.addEventListener("scroll", handleScroll);
-    // window.addEventListener("mouseup", clickHandle);
+    window.addEventListener("mouseup", clickHandle);
   }, []);
 
-  const handleScroll = () => {
-    setTopPosition(window.pageYOffset);
-  };
 
   const clickHandle = (e) => {
-    e.preventDefault();
-    if (!boxRef.current.contains(e.target)) {
-      if (containerRef) {
-        setIsBoxActive(false);
-      }
+    if (e.target === containerRef.current) {
       setIsBoxActive(false);
-      window.removeEventListener("mouseup", clickHandle);
     }
   };
 
@@ -44,11 +34,12 @@ const AddOrder = () => {
       </div>
       {isboxActive && (
         <div ref={containerRef} className="add-form-container">
-          <div
-            ref={boxRef}
-            className="form-box"
-            onLoad={() => console.log(this)}
-          ></div>
+          <div ref={boxRef} className="form-box">
+            <MdClose
+              className="close-icon"
+              onClick={() => setIsBoxActive(false)}
+            />
+          </div>
         </div>
       )}
     </div>

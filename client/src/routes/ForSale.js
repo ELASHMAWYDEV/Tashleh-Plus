@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { ItemBox, Pagination } from "../components/index";
 
 //Styles
-import "../styles/Cars.scss";
+import "../styles/ForSale.scss";
 
-const Cars = () => {
+const ForSale = () => {
   const filterList = require("../util/filterList.json");
-  const cars = require("../util/cars.json");
+  const forSale = require("../util/forSale.json");
 
   const [selectedCarType, setSelectedCarType] = useState(0);
   const [selectedCarModel, setSelectedCarModel] = useState(0);
@@ -20,9 +20,9 @@ const Cars = () => {
   useEffect(() => {}, []);
 
   return (
-    <div className="cars-container">
-      <h1 className="cars-title">سيارات التشليح المعروضة للبيع</h1>
-      <div className="cars-body">
+    <div className="for-sale-container">
+      <h1 className="for-sale-title">القطع المعروضة للبيع</h1>
+      <div className="for-sale-body">
         <div className="filter-container">
           <h2 className="filter-title">تصفية</h2>
           <div className="one-filter-container">
@@ -74,7 +74,7 @@ const Cars = () => {
           </div>
         </div>
         <div className="items-container">
-          {cars.map((item, i) => (
+          {forSale.map((item, i) => (
             <ItemBox key={i} item={item} />
           ))}
           <Pagination numOfPages={5}/>
@@ -84,4 +84,4 @@ const Cars = () => {
   );
 };
 
-export default Cars;
+export default ForSale;

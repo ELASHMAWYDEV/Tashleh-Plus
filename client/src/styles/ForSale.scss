@@ -1,0 +1,13 @@
+@import "global";
+@import "./Requests.scss";
+
+
+.for-sale-container {
+  @extend .requests-container;
+  .for-sale-title {
+    @extend .requests-title;
+  }
+  .for-sale-body {
+    @extend .requests-body;
+  }
+}

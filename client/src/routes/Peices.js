@@ -4,9 +4,10 @@ import {
   useLocation,
   useRouteMatch,
   Redirect,
+  Switch,
 } from "react-router-dom";
 import { AddOrder } from "../components/index";
-import { Requests } from "./index";
+import { Requests, ForSale } from "./index";
 
 //Styles
 import "../styles/Peices.scss";
@@ -17,7 +18,9 @@ const Peices = () => {
 
   return (
     <div className="peices-container">
-      <Redirect exact from={path} to={`${path}/requests`} />
+      <Switch>
+        <Redirect exact strict from={path} to={`${path}/requests`} />
+      </Switch>
       <AddOrder />
       <div className="nav-btns">
         <Link
@@ -41,7 +44,7 @@ const Peices = () => {
         <Requests />
       </Route>
       <Route path={`${path}/for-sale`}>
-        <h1>for-sale</h1>
+        <ForSale />
       </Route>
     </div>
   );

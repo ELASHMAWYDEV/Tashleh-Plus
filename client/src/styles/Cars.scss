@@ -1,0 +1,13 @@
+@import "global";
+@import "./Requests.scss";
+
+
+.cars-container {
+  @extend .requests-container;
+  .cars-title {
+    @extend .requests-title;
+  }
+  .cars-body {
+    @extend .requests-body;
+  }
+}

@@ -48,6 +48,9 @@
           background-color: $red;
         }
       }
+      .price-box {
+        @extend .status-box;
+      }
     }
   }
   .description {

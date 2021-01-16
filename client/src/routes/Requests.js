@@ -77,7 +77,7 @@ const Requests = () => {
           {itemList.map((item, i) => (
             <ItemBox key={i} item={item} />
           ))}
-          <Pagination />
+          <Pagination numOfPages={5}/>
         </div>
       </div>
     </div>

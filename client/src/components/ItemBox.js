@@ -4,6 +4,9 @@ import { AiFillTag, AiOutlineClockCircle } from "react-icons/ai";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
 
+//Helpers
+import formatTime from "../helpers/formatTime";
+
 //Styles
 import "../styles/ItemBox.scss";
 
@@ -12,14 +15,16 @@ import Image from "../assets/img/test-img.png";
 
 const ItemBox = ({
   item: {
+    type = 1,
     title = "",
     description = "",
     peices = [],
-    status = 1,
-
+    status = 0,
     username = "",
     createTime = new Date().getTime(),
     city = "",
+    peicesAvailable = 0,
+    price = 0,
   },
 }) => {
   let statusText = "";
@@ -48,46 +53,49 @@ const ItemBox = ({
           <Link>
             <h1>{title}</h1>
           </Link>
-          <p
-            className={`status-box ${
-              status == 2
-                ? "status-box-blue"
-                : status == 3
-                ? "status-box-red"
-                : ""
-            }`}
-          >
-            {statusText}
-          </p>
+          {type === 1 && (
+            <p
+              className={`status-box ${
+                status === 2
+                  ? "status-box-blue"
+                  : status === 3
+                  ? "status-box-red"
+                  : ""
+              }`}
+            >
+              {statusText}
+            </p>
+          )}
+          {type === 2 && <p className="price-box">سعر القطعة: {price} ريال</p>}
+          {type === 3 && <p className="price-box">{price} ريال</p>}
         </div>
-        <h3 className="description">
-          هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا
-          النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من
-          النصوص الأخرى إضافة إلى زيادة
-        </h3>
+        <h3 className="description">{description}</h3>
         <div className="box-footer">
-          <div className="item-option-container">
-            <AiFillTag className="icon icon-tag" />
-            <p>عدد القطع المطلوبة: 6</p>
-          </div>
+          {[1, 2].includes(type) && (
+            <div className="item-option-container">
+              <AiFillTag className="icon icon-tag" />
+              {type === 1 && <p>عدد القطع المطلوبة: 6</p>}
+              {type === 2 && <p>عدد القطع المتوفرة: {peicesAvailable}</p>}
+            </div>
+          )}
           <div className="item-option-container">
             <IoLocationOutline className="icon" />
-            <p>الرياض</p>
+            <p>{city}</p>
           </div>
           <div className="item-option-container">
             <FaUserAlt className="icon" />
-            <p>محمود العشماوي</p>
+            <p>{username}</p>
           </div>
           <div className="item-option-container">
             <AiOutlineClockCircle className="icon" />
-            <p>منذ 2 ساعة</p>
+            <p>{formatTime(createTime)}</p>
           </div>
         </div>
         <div className="border-mask"></div>
       </div>
       <div className="img-container">
         <Link>
-          <img src={Image} alt="Image" />
+          <img src={Image} alt="item" />
         </Link>
       </div>
     </div>
