@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { AiFillTag, AiOutlineClockCircle } from "react-icons/ai";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaUserAlt } from "react-icons/fa";
@@ -15,16 +15,17 @@ import Image from "../assets/img/test-img.png";
 
 const ItemBox = ({
   item: {
-    type = 1,
-    title = "",
-    description = "",
-    peices = [],
-    status = 0,
-    username = "",
-    createTime = new Date().getTime(),
-    city = "",
-    peicesAvailable = 0,
-    price = 0,
+    id,
+    type,
+    title,
+    description,
+    peices,
+    status,
+    username,
+    createTime,
+    city,
+    peicesAvailable,
+    price,
   },
 }) => {
   let statusText = "";
@@ -46,13 +47,29 @@ const ItemBox = ({
       break;
   }
 
+  let totalRemainingQuantity = 0;
+  if (type === 1) {
+    for (let p of peices) {
+      totalRemainingQuantity += p.quantity;
+    }
+  }
+
   return (
-    <div className="item-box-container">
+    <Link
+      to={
+        type === 1
+          ? `/home/requests/${id}`
+          : type === 2
+          ? `/home/for-sale/${id}`
+          : type === 3
+          ? `/cars/${id}`
+          : "#"
+      }
+      className="item-box-container"
+    >
       <div className="box-body">
         <div className="box-header">
-          <Link>
-            <h1>{title}</h1>
-          </Link>
+          <h1>{title}</h1>
           {type === 1 && (
             <p
               className={`status-box ${
@@ -74,7 +91,9 @@ const ItemBox = ({
           {[1, 2].includes(type) && (
             <div className="item-option-container">
               <AiFillTag className="icon icon-tag" />
-              {type === 1 && <p>عدد القطع المطلوبة: 6</p>}
+              {type === 1 && (
+                <p>عدد القطع المطلوبة: {totalRemainingQuantity}</p>
+              )}
               {type === 2 && <p>عدد القطع المتوفرة: {peicesAvailable}</p>}
             </div>
           )}
@@ -94,11 +113,9 @@ const ItemBox = ({
         <div className="border-mask"></div>
       </div>
       <div className="img-container">
-        <Link>
-          <img src={Image} alt="item" />
-        </Link>
+        <img src={Image} alt="item" />
       </div>
-    </div>
+    </Link>
   );
 };
 

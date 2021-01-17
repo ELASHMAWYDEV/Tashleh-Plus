@@ -40,10 +40,10 @@ const Peices = () => {
           قسم عرض القطع
         </Link>
       </div>
-      <Route path={`${path}/requests`}>
+      <Route exact path={`${path}/requests`}>
         <Requests />
       </Route>
-      <Route path={`${path}/for-sale`}>
+      <Route exact path={`${path}/for-sale`}>
         <ForSale />
       </Route>
     </div>

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useRouteMatch } from "react-router-dom";
 
 //Styles
 import "../styles/Header.scss";
@@ -13,12 +13,19 @@ const Header = () => {
   return (
     <div className="header-container">
       <div className="logo-container">
-        <img src={Logo} alt="Tashleh Plus" />
+        <Link to="/home">
+          <img src={Logo} alt="Tashleh Plus" />
+        </Link>
       </div>
       <div className="nav-container">
         <Link
           to="/home"
-          className={`${location.pathname.startsWith("/home") ? "active-link" : ""}`}
+          className={`${
+            location.pathname === "/home/requests" ||
+            location.pathname === "/home/for-sale"
+              ? "active-link"
+              : ""
+          }`}
         >
           القطع
         </Link>

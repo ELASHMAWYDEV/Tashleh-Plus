@@ -10,6 +10,7 @@
     border-right: 2px solid $gray;
     border-bottom: 2px solid $gray;
     padding-right: 20px;
+    color: $black;
     .border-mask {
       width: 50%;
       height: 2px;
@@ -22,7 +23,7 @@
     .box-header {
       display: flex;
       justify-content: space-between;
-      & > a {
+      & > h1 {
         color: $black;
         transition: 0.2s ease;
         &:hover {
