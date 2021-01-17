@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { MdClose } from "react-icons/md";
+import { IoIosClose } from "react-icons/all";
 
 //Styles
 import "../styles/AddOrder.scss";
@@ -34,8 +34,8 @@ const AddOrder = () => {
       </div>
       {isboxActive && (
         <div ref={containerRef} className="add-form-container">
-          <div ref={boxRef} className="form-box">
-            <MdClose
+          <div ref={boxRef} className="floating-box">
+            <IoIosClose
               className="close-icon"
               onClick={() => setIsBoxActive(false)}
             />

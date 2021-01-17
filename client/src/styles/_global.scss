@@ -5,7 +5,7 @@ $gray: #8395a7;
 $white: #ffffff;
 $black: #222f3e;
 $red: #eb4d4b;
-$green: #2ECC71;
+$green: #2ecc71;
 
 //Fonts
 @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap"); //font-family: 'Almarai', sans-serif;
@@ -45,5 +45,55 @@ $green: #2ECC71;
   &:active {
     transition: none;
     transform: scale(0.95);
+  }
+}
+
+@mixin FloatingContainer {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  padding: 50px 0px;
+  backdrop-filter: blur(5px);
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .floating-box {
+    width: 600px;
+    max-width: 95%;
+    height: max-content;
+    padding: 60px 20px 30px;
+    background-color: $white;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    position: relative;
+    animation: boxAnim 0.3s 0s 1 ease;
+    @keyframes boxAnim {
+      0% {
+        transform: translateY(-80px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+    }
+    .close-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 40px;
+      color: $gray;
+    }
   }
 }

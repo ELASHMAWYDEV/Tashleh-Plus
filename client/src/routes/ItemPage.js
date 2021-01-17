@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useLocation, useRouteMatch } from "react-router-dom";
 import {
   AiFillTag,
@@ -8,6 +8,7 @@ import {
   FaUserAlt,
   IoIosArrowDroprightCircle,
   IoIosArrowDropleftCircle,
+  IoIosClose,
 } from "react-icons/all";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -27,6 +28,25 @@ import formatTime from "../helpers/formatTime";
 const ItemPage = () => {
   const { id } = useParams();
   const { path } = useRouteMatch();
+
+  const buyBoxRef = useRef(null);
+  const contactBoxRef = useRef(null);
+
+  const [buyBoxVisible, setBuyBoxVisible] = useState(false);
+  const [contactBoxVisible, setContactBoxVisible] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("mouseup", clickHandle);
+  }, []);
+
+  const clickHandle = (e) => {
+    if (e.target === buyBoxRef.current) {
+      setBuyBoxVisible(false);
+    }
+    if (e.target === contactBoxRef.current) {
+      setContactBoxVisible(false);
+    }
+  };
 
   let type = null;
   switch (path) {
@@ -90,7 +110,7 @@ const ItemPage = () => {
   }
 
   return (
-    <div className="peice-page-container">
+    <div className="item-page-container">
       <div className="item-container">
         <div className="item-header">
           <h1>{title}</h1>
@@ -177,7 +197,12 @@ const ItemPage = () => {
           </div>
         </div>
         {[2, 3].includes(type) && (
-          <button className="action-btn contact-btn">التواصل مع البائع</button>
+          <button
+            className="action-btn contact-btn"
+            onClick={() => setContactBoxVisible(true)}
+          >
+            التواصل مع البائع
+          </button>
         )}
         <p className="notice">
           {type === 1 && "اضغط هنا لتقديم عرض للزبون"}
@@ -188,9 +213,68 @@ const ItemPage = () => {
           <button className="action-btn contact-btn">تقديم عرض</button>
         )}
         {[2, 3].includes(type) && (
-          <button className="action-btn buy-btn">شراء فوري</button>
+          <button
+            className="action-btn buy-btn"
+            onClick={() => setBuyBoxVisible(true)}
+          >
+            شراء فوري
+          </button>
         )}
       </div>
+
+      {buyBoxVisible && (
+        <div className="confirm-box-container" ref={buyBoxRef}>
+          <div className="floating-box">
+            <IoIosClose
+              className="close-icon"
+              onClick={() => setBuyBoxVisible(false)}
+            />
+            <div className="box-body">
+              <h3>هل أنت متأكد من أنك تريد شراء</h3>
+              <h1>{title}</h1>
+              {type === 2 && (
+                <div className="how-many-container">
+                  <input type="number" placeholder="عدد القطع التي تريدها" min={0} max={peicesAvailable}/>
+                </div>
+              )}
+              <div className="box-btns">
+                <button className="yes-btn">الذهاب للدفع</button>
+                <button
+                  className="no-btn"
+                  onClick={() => setBuyBoxVisible(false)}
+                >
+                  الغاء
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {contactBoxVisible && (
+        <div className="confirm-box-container" ref={contactBoxRef}>
+          <div className="floating-box">
+            <IoIosClose
+              className="close-icon"
+              onClick={() => setContactBoxVisible(false)}
+            />
+            <div className="box-body">
+              <h3>التواصل مع {username}</h3>
+              <h4>بخصوص</h4>
+              <h1>{title}</h1>
+              <h2>هل أنت متأكد ؟</h2>
+              <div className="box-btns">
+                <button className="yes-btn">ابدأ المحادثة</button>
+                <button
+                  className="no-btn"
+                  onClick={() => setContactBoxVisible(false)}
+                >
+                  الغاء
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
