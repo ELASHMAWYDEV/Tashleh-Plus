@@ -52,33 +52,7 @@
         }
       }
       .select-container {
-        display: flex;
-        margin: 15px 0;
-        position: relative;
-        width: max-content;
-        select {
-          width: 300px;
-          background-color: $gray;
-          outline: none;
-          border: none;
-          color: $white;
-          text-align-last: center;
-          padding: 5px;
-          border-radius: 10px;
-          font-size: 20px;
-          cursor: pointer;
-          appearance: none;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-        }
-        span {
-          border: 8px solid transparent;
-          border-top: 12px solid $white;
-          display: inline-block;
-          position: absolute;
-          left: 20px;
-          top: 10px;
-        }
+        @include SelectContainer;
       }
     }
     .items-container {

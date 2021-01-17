@@ -34,5 +34,142 @@
   }
   .add-form-container {
     @include FloatingContainer;
+    .box-body {
+      & > h1,
+      & > h2 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .input-item {
+        margin: 10px 0px 30px;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        input {
+          @include Input;
+          &.peice-input {
+            width: 40%;
+          }
+        }
+        textarea {
+          @include Input;
+          height: 250px;
+        }
+        .select-container {
+          @include SelectContainer;
+          height: 50px;
+          width: 40%;
+          margin: 0;
+          select {
+            width: 100%;
+            height: 100%;
+          }
+          span {
+            top: 20px;
+          }
+        }
+        .plus-btn {
+          color: $blue;
+          font-size: 50px;
+          cursor: pointer;
+          transition: 0.2s ease;
+          user-select: none;
+          &:hover {
+            color: $black;
+          }
+          &:active {
+            transition: none;
+            transform: scale(0.9);
+          }
+        }
+        .remove-btn {
+          @extend .plus-btn;
+          color: $red;
+        }
+      }
+      .upload-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        input {
+          display: none;
+        }
+        p {
+          font-size: 20px;
+        }
+        .upload-btn {
+          @include Button;
+          background-color: $gray;
+          display: flex;
+          gap: 20px;
+          .attachment-icon {
+            color: $white;
+          }
+        }
+      }
+      .record-container {
+        @extend .upload-container;
+        .record-btn {
+          @extend .upload-btn;
+          background-color: $blue;
+          .record-icon {
+            @extend .attachment-icon;
+          }
+        }
+      }
+      .checkboxs-container {
+        margin-top: 30px;
+        label {
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          margin-bottom: 15px;
+          input {
+            display: none;
+            &:checked ~ .checkmark {
+              background-color: $blue;
+              .checkmark-icon {
+                display: block;
+              }
+            }
+          }
+          .checkmark {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            background-color: $white;
+            border-radius: 7px;
+            box-shadow: 0 0 10px rgba($color: $black, $alpha: 0.2);
+            cursor: pointer;
+            border: 2px solid $blue;
+            
+            &:hover {
+
+            }
+            .checkmark-icon {
+              display: none;
+              color: $white;
+              font-size: 30px;
+              text-align: center;
+            }
+          }
+          p {
+            color: $gray;
+          }
+        }
+      }
+      .submit-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .submit-btn {
+          @include Button;
+          align-self: center;
+          
+        }
+      }
+    }
   }
 }

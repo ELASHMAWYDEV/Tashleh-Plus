@@ -9,6 +9,10 @@ import {
   IoIosArrowDroprightCircle,
   IoIosArrowDropleftCircle,
   IoIosClose,
+  FaInfoCircle,
+  ImAttachment,
+  BsFillMicFill,
+  BiCheck
 } from "react-icons/all";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -31,9 +35,12 @@ const ItemPage = () => {
 
   const buyBoxRef = useRef(null);
   const contactBoxRef = useRef(null);
+  const offerBoxRef = useRef(null);
 
+  const [peicesOfferd, setPeicesOfferd] = useState([]);
   const [buyBoxVisible, setBuyBoxVisible] = useState(false);
   const [contactBoxVisible, setContactBoxVisible] = useState(false);
+  const [offerBoxVisible, setOfferBoxVisible] = useState(false);
 
   useEffect(() => {
     window.addEventListener("mouseup", clickHandle);
@@ -45,6 +52,9 @@ const ItemPage = () => {
     }
     if (e.target === contactBoxRef.current) {
       setContactBoxVisible(false);
+    }
+    if (e.target === offerBoxRef.current) {
+      setOfferBoxVisible(false);
     }
   };
 
@@ -161,6 +171,18 @@ const ItemPage = () => {
           <h2>التفاصيل</h2>
           <p>{description}</p>
         </div>
+        {type === 1 && (
+          <div className="peices-container">
+            <h2>القطع المطلوبة</h2>
+            {peices.map((item, i) => (
+              <div className="peice-container">
+                <p className="peice-index">{i + 1}</p>
+                <p className="peice-name">{item.name}</p>
+                <h3>عدد القطع المطلوبة: {item.quantity}</h3>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="info-container">
         <div className="info-box">
@@ -210,7 +232,12 @@ const ItemPage = () => {
           {type === 3 && "أو يمكنك شراء السيارة "}
         </p>
         {type === 1 && (
-          <button className="action-btn contact-btn">تقديم عرض</button>
+          <button
+            className="action-btn contact-btn"
+            onClick={() => setOfferBoxVisible(true)}
+          >
+            تقديم عرض
+          </button>
         )}
         {[2, 3].includes(type) && (
           <button
@@ -234,7 +261,12 @@ const ItemPage = () => {
               <h1>{title}</h1>
               {type === 2 && (
                 <div className="how-many-container">
-                  <input type="number" placeholder="عدد القطع التي تريدها" min={0} max={peicesAvailable}/>
+                  <input
+                    type="number"
+                    placeholder="عدد القطع التي تريدها"
+                    min={0}
+                    max={peicesAvailable}
+                  />
                 </div>
               )}
               <div className="box-btns">
@@ -251,7 +283,7 @@ const ItemPage = () => {
         </div>
       )}
       {contactBoxVisible && (
-        <div className="confirm-box-container" ref={contactBoxRef}>
+        <div className="contact-box-container" ref={contactBoxRef}>
           <div className="floating-box">
             <IoIosClose
               className="close-icon"
@@ -270,6 +302,101 @@ const ItemPage = () => {
                 >
                   الغاء
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {offerBoxVisible && (
+        <div className="offer-box-container" ref={offerBoxRef}>
+          <div className="floating-box">
+            <IoIosClose
+              className="close-icon"
+              onClick={() => setOfferBoxVisible(false)}
+            />
+            <div className="box-body">
+              <h1>تقديم عرض للزبون</h1>
+              <div className="info-container">
+                <FaInfoCircle className="info-icon" />
+                <p>
+                  1- يمكنك تقديم عرض علي القطع المتوفرة لديك فقط ، ولا يلزم
+                  تقديم عرض علي كل القطع التي يطلبها الزبون في حال لم تتوفر
+                  جميعها لديك
+                  <br />
+                  2- الزبون له الحق في أن يوافق علي عرضك بالكامل أو جزء منه يرجي
+                  الالتزام بشروط الموقع وعدم مشاركة أي وسائل تواصل خارج الموقع
+                  <br />
+                  3- لضمان حقك كبائع يرجي التواصل من خلال المنصة فقط ، وعدم
+                  مشاركة أي وسائل تواصل خارج المنصة
+                </p>
+              </div>
+              <h2>القطع المتوفرة</h2>
+              <div className="peices-container">
+                {peices.map((item, i) => (
+                  <div className="peice-form-container">
+                    <div className="peice-container">
+                      <p className="peice-index">{i + 1}</p>
+                      <p className="peice-name">{item.name}</p>
+                      <h3>عدد القطع المطلوبة: {item.quantity}</h3>
+                    </div>
+                    <div className="inputs-container">
+                      <div className="select-container">
+                        <select>
+                          <option>اختر عدد القطع</option>
+                          {[...Array(item.quantity)].map((item, i) => (
+                            <option key={i} value={i + 1}>
+                              {i + 1} قطعة
+                            </option>
+                          ))}
+                        </select>
+                        <span></span>
+                      </div>
+                      <input
+                        type="number"
+                        placeholder="سعر القطعة بالريال السعودي"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <textarea
+                className="message-box"
+                placeholder="يرجي كتابة رسالة للزبون توضح له ما الذي ستوفره له"
+              />
+              <div className="upload-container">
+                <p>صور القطع (اختياري)</p>
+                <label className="upload-btn">
+                  <p>ارفاق الصور</p>
+                  <ImAttachment className="attachment-icon" />
+                  <input type="file" multiple accept=".jpg,.jpeg,.png" />
+                </label>
+              </div>
+              <div className="record-container">
+                <p>مقطع صوتي (اجباري)</p>
+                <label className="record-btn">
+                  <p>بدء التسجيل</p>
+                  <BsFillMicFill className="record-icon" />
+                  <input type="file" accept=".mp3" />
+                </label>
+              </div>
+              <div className="checkboxs-container">
+                <label>
+                  <input type="checkbox" />
+                  <span className="checkmark">
+                    <BiCheck className="checkmark-icon" />
+                  </span>
+                  <p>هذا الطلب لا يحتوي علي أي وسائل تواصل خارج الموقع</p>
+                </label>
+                <label>
+                  <input type="checkbox" />
+                  <span className="checkmark">
+                    <BiCheck className="checkmark-icon" />
+                  </span>
+                  <p>لقد راجعت شروط موقع تشليح بلس</p>
+                </label>
+              </div>
+              <div className="submit-container">
+                <button className="submit-btn">تقديم العرض</button>
               </div>
             </div>
           </div>
