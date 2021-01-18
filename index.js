@@ -19,4 +19,7 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
+
+// app.use("/api", require("./api/index"));
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

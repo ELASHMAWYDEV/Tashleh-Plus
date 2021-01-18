@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FaDotCircle } from "react-icons/all";
 import { Header, Footer } from "../components/index";
 
