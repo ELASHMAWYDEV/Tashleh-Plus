@@ -6,7 +6,11 @@ import {
   useRouteMatch,
   useLocation,
   useHistory,
+  Redirect,
 } from "react-router-dom";
+
+//Helpers
+import { useAuthContext } from "../helpers/AppProvider";
 
 //Styles
 import "../styles/Auth.scss";
@@ -15,6 +19,8 @@ import "../styles/Auth.scss";
 import Logo from "../assets/img/logo-blue.png";
 
 const Auth = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+
   const { path } = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
@@ -27,6 +33,7 @@ const Auth = () => {
   }, [location]);
   return (
     <div className="auth-container">
+      {isLoggedIn && <Redirect to="/home/requests" />}
       {/*-------------Logo container START-------------*/}
 
       <div className="logo-container">
@@ -115,7 +122,14 @@ const Auth = () => {
                 <input type="password" placeholder="كلمة المرور" />
               </div>
               <div className="input-item">
-                <button className="auth-btn">تسجيل الدخول</button>
+                <button
+                  className="auth-btn"
+                  onClick={() => {
+                    setIsLoggedIn(true);
+                  }}
+                >
+                  تسجيل الدخول
+                </button>
               </div>
             </div>
             <div className="box-footer">

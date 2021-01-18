@@ -1,0 +1,147 @@
+@import "global";
+
+.pay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 15px;
+  & > h1 {
+    text-align: center;
+  }
+
+  .pay-box {
+    margin: 50px auto;
+    width: 1400px;
+    max-width: 95%;
+    border-radius: 12px;
+    background-color: $white;
+    border: 1.5px solid rgba($color: $black, $alpha: 0.1);
+    box-shadow: 0px 0px 10px rgba($color: #000000, $alpha: 0.2);
+    padding: 30px 20px;
+    .box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .right-items,
+      .left-items {
+        display: flex;
+        align-items: center;
+        h3 {
+          margin-left: 10px;
+        }
+        h2 {
+          font-weight: normal;
+        }
+      }
+      .bill-id {
+        color: $blue;
+        font-weight: bold;
+      }
+    }
+    .bill-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 30px 0px;
+      thead {
+        tr {
+          border-bottom: 2px solid $gray;
+        }
+        th {
+          font-size: 26px;
+          font-weight: bold;
+          text-align: center;
+          padding-bottom: 7px;
+          &:nth-child(1) {
+            text-align: right;
+          }
+        }
+      }
+      tbody {
+        tr {
+          &:nth-last-child(1) {
+            border-top: 2px solid $gray;
+            td {
+              font-size: 24px;
+            }
+          }
+          &:nth-last-child(2) {
+            padding-bottom: 20px;
+          }
+        }
+        td {
+          text-align: center;
+          padding: 16px 0px;
+          &:nth-child(1) {
+            text-align: right;
+          }
+          &:nth-child(2),
+          &:nth-child(3) {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    & > h2 {
+      text-align: center;
+    }
+    .methods-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      .right-items {
+        display: flex;
+        gap: 40px;
+        label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          p {
+            font-size: 22px;
+            font-weight: bold;
+          }
+          input {
+            display: none;
+            &:checked ~ .radio-btn {
+              border: none;
+              .dot-icon {
+                display: block;
+              }
+              & ~ p {
+                color: $blue;
+              }
+            }
+          }
+          .radio-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: $white;
+            border: 1.5px solid $blue;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover {
+              background-color: rgba($color: $gray, $alpha: 0.1);
+            }
+            .dot-icon {
+              display: none;
+              color: $blue;
+              font-size: 30px;
+            }
+          }
+        }
+      }
+      .left-items {
+        .pay-btn {
+          @include Button;
+          background-color: $green;
+          padding: 10px 60px;
+          border-radius: 7px;
+        }
+      }
+    }
+
+  }
+}

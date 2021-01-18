@@ -6,7 +6,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { AddOrder } from "../components/index";
+import { AddOrder, Footer, Header } from "../components/index";
 import { Requests, ForSale } from "./index";
 
 //Styles
@@ -17,36 +17,40 @@ const Peices = () => {
   const location = useLocation();
 
   return (
-    <div className="peices-container">
-      <Switch>
-        <Redirect exact strict from={path} to={`${path}/requests`} />
-      </Switch>
-      <AddOrder />
-      <div className="nav-btns">
-        <Link
-          to={`${path}/requests`}
-          className={
-            location.pathname === `${path}/requests` ? "active-nav-btn" : ""
-          }
-        >
-          طلبات القطع من الزبائن
-        </Link>
-        <Link
-          to={`${path}/for-sale`}
-          className={
-            location.pathname === `${path}/for-sale` ? "active-nav-btn" : ""
-          }
-        >
-          قسم عرض القطع
-        </Link>
+    <>
+      <Header />
+      <div className="peices-container">
+        <Switch>
+          <Redirect exact strict from="/home" to={`/home/requests`} />
+        </Switch>
+        <AddOrder />
+        <div className="nav-btns">
+          <Link
+            to={`/home/requests`}
+            className={
+              location.pathname === `/home/requests` ? "active-nav-btn" : ""
+            }
+          >
+            طلبات القطع من الزبائن
+          </Link>
+          <Link
+            to={`/home/for-sale`}
+            className={
+              location.pathname === `/home/for-sale` ? "active-nav-btn" : ""
+            }
+          >
+            قسم عرض القطع
+          </Link>
+        </div>
+        <Route exact path={`/home/requests`}>
+          <Requests />
+        </Route>
+        <Route exact path={`/home/for-sale`}>
+          <ForSale />
+        </Route>
       </div>
-      <Route exact path={`${path}/requests`}>
-        <Requests />
-      </Route>
-      <Route exact path={`${path}/for-sale`}>
-        <ForSale />
-      </Route>
-    </div>
+      <Footer />
+    </>
   );
 };
 

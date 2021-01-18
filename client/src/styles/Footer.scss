@@ -1,13 +1,15 @@
 @import "global";
 
-
 .footer-container {
-  margin-top: 50px;
-  background-color: $gray;
-  padding: 10px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: auto;
+  footer {
+    margin-top: 50px;
+    background-color: $gray;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .right-items {
     a {
       margin-right: 20px;
@@ -21,7 +23,7 @@
   }
   .left-items {
     p {
-      font-family: 'Cairo', sans-serif;
+      font-family: "Cairo", sans-serif;
       font-size: 18px;
       color: $white;
     }

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const AppContext = createContext(null);
 const AuthContext = createContext(null);
@@ -11,6 +11,16 @@ export const useLoadingContext = () => useContext(LoadingContext);
 export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setIsLoggedIn(eval(localStorage.getItem("loggedIn")));
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("loggedIn", `${isLoggedIn}`);
+  }, [isLoggedIn]);
 
   return (
     <AppContext.Provider value={null}>

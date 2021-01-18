@@ -1,31 +1,40 @@
+import { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import { Footer, Loader } from "./components/index";
-import { Home, Auth } from "./routes/index";
-import { AppProvider, useLoadingContext } from "./helpers/AppProvider";
+import { Loader } from "./components/index";
+import { Auth, ItemPage, Peices, Cars, Pay } from "./routes/index";
+import { useAuthContext, useLoadingContext } from "./helpers/AppProvider";
 
 //Styles
 import "./styles/App.scss";
 
 const App = () => {
+  const { isLoggedIn } = useAuthContext();
+  const { setIsLoading } = useLoadingContext();
+
   return (
-    <AppProvider>
-      <div className="App">
-        <Loader />
-        <Router>
-          <Switch>
-            <Redirect exact strict from="/" to="/home" />
-            <Route path="/auth" component={Auth} />
-            <Route path="/" component={Home} />
-          </Switch>
-          <Footer />
-        </Router>
-      </div>
-    </AppProvider>
+    <div className="App">
+      <Loader />
+      <Router>
+        <Switch>
+          {!isLoggedIn && <Route path="/auth" component={Auth} />}
+          <Route exact path="/home/for-sale/:id" component={ItemPage} />
+          <Route exact path="/home/for-sale" component={Peices} />
+          <Route exact path="/home/requests/:id" component={ItemPage} />
+          <Route exact path="/home/requests" component={Peices} />
+          <Route exact path="/cars/:id" component={ItemPage} />
+          <Route exact path="/cars" component={Cars} />
+          <Route exact path="/pay" component={Pay} />
+          <Route>
+            <Redirect to="/home/requests" />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 };
 
