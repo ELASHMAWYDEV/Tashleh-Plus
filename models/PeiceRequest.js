@@ -11,27 +11,38 @@ const PeiceSchema = new Schema({
 });
 
 const PeiceRequestSchema = new Schema({
-  title: String,
-  description: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
   peices: [PeiceSchema],
-  status: Number,
+  status: {
+    type: Number,
+    default: 1,
+    required: true,
+  },
   city: {
     type: Number,
     ref: "City",
+    required: true,
   },
   userId: {
     type: Number,
     ref: "User",
+    required: true,
   },
   createTime: {
     type: Date,
     default: Date.now(),
   },
-});
-
-PeiceSchema.plugin(autoIncrement.plugin, {
-  model: "PeiceRequest",
-  startAt: 1,
+  carTypeId: {
+    type: Number,
+    ref: "carTypes",
+  }
 });
 
 PeiceRequestSchema.plugin(autoIncrement.plugin, {

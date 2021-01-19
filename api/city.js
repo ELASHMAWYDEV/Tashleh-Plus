@@ -1,7 +1,7 @@
 // @ts-nocheck
 const express = require("express");
 const router = express.Router();
-const CityModel = require("../../models/City");
+const CityModel = require("../models/City");
 
 router.post("/add", async (req, res) => {
   try {
@@ -79,7 +79,7 @@ router.post("/delete", async (req, res) => {
       });
 
     //Check if exists before
-    if (!(await CityModel.findOne({ name: city.name })))
+    if (!(await CityModel.findOne({ _id: city._id })))
       return res.json({
         status: false,
         errors: ["هذه المدينة غير مسجلة من قبل"],
@@ -173,7 +173,7 @@ router.post("/edit", async (req, res) => {
     if (!city._id)
       return res.json({
         status: false,
-        errors: ["يجب اختيار المدينة التي تريد حذفها"],
+        errors: ["يجب اختيار المدينة التي تريد تعديلها"],
       });
 
     if (!city.name)

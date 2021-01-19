@@ -5,20 +5,25 @@ const mongoose = require("mongoose"),
 //Init auto increament
 autoIncrement.initialize(mongoose.connection);
 
-const CitySchema = new Schema({
+const ModelSchema = new Schema({
+  name: String,
+});
+
+const CarTypeSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
+  models: [ModelSchema],
   createTime: {
     type: Date,
     default: Date.now(),
   },
 });
 
-CitySchema.plugin(autoIncrement.plugin, {
-  model: "City",
+CarTypeSchema.plugin(autoIncrement.plugin, {
+  model: "CarType",
   startAt: 1,
 });
 
-module.exports = mongoose.model("City", CitySchema, "city");
+module.exports = mongoose.model("CarType", CarTypeSchema, "carTypes");
