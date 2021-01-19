@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
     }
 
     //Check for permissions to add aonther admin
-    if (!(req.user && req.user.type == 1) && validateUser.type == 1) {
+    if (!(req.user && req.user.type == 1) && validateUser.user.type == 1) {
       return res.json({
         status: false,
         errors: ["لا يمكنك اضافة مشرفين"],
