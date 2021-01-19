@@ -5,7 +5,7 @@ const mongoose = require("mongoose"),
 //Init auto increament
 autoIncrement.initialize(mongoose.connection);
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   type: Number, //1 ==> admin, 2 ==> Vendor, 3 ==> Customer
   username: String,
   email: String,
